@@ -13,15 +13,22 @@
 <body>
     <div class="container">
 
+        <form id="form1" runat="server">
+
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="Default.aspx">POOG</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"> 
+                    <li> 
                         <a href="Default.aspx"> Inicio </a>
                     </li>
+                    <li>
+                        <a href="InsertItem.aspx">Insertar Artículo</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="Logout.aspx"> Salir </a>
                     </li>
@@ -29,7 +36,6 @@
             </div>
         </nav>
 
-        <form id="form1" runat="server">
             <div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>

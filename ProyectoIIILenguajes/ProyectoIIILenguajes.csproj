@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="ArticleList.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="InsertItem.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="public\css\bootstrap.css" />
     <Content Include="public\js\bootstrap.js" />
@@ -114,6 +115,13 @@
     <Compile Include="Default.Master.designer.cs">
       <DependentUpon>Default.Master</DependentUpon>
     </Compile>
+    <Compile Include="InsertItem.aspx.cs">
+      <DependentUpon>InsertItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertItem.aspx.designer.cs">
+      <DependentUpon>InsertItem.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -157,6 +165,10 @@
     <ProjectReference Include="..\Business\Business.csproj">
       <Project>{6fed5175-dc4f-4b40-91e7-b57a8bc5d965}</Project>
       <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{13E9E5B8-7418-4DC2-9FBF-E4BCC846D3BC}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

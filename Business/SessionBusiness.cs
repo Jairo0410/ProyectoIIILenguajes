@@ -21,5 +21,10 @@ namespace Business
             return this.sessionData.login(username, password);
         }
 
+        public String register(String username, String password, int age, char gender)
+        {
+            return this.sessionData.register(username, password, age, gender);
+        }
+
     }
 }
