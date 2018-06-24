@@ -31,9 +31,9 @@ namespace Business
             return this.itemData.addItem(name, price, description, imageRoute, category);
         }
 
-        public LinkedList<Item> getItems()
+        public LinkedList<Item> getItems(String date)
         {
-            return this.itemData.getItems();
+            return this.itemData.getItems(date);
         }
     }
 }

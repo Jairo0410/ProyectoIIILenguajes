@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business;
+using Utilities;
 
 namespace ProyectoIIILenguajes
 {
@@ -24,6 +25,10 @@ namespace ProyectoIIILenguajes
                 {
                     Server.Transfer("PurchaseHistory.aspx", true);
                 }
+            }
+            else
+            {
+                lblMessage.Text = Util.getAppDate();
             }
         }
 
@@ -54,7 +59,7 @@ namespace ProyectoIIILenguajes
             {
                 lblMessage.Text = "Credenciales incorrectas ";
             }
-            
+
         }
     }
 }

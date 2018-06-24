@@ -14,5 +14,10 @@ namespace Data
         {
             this.connectionString = connectionString;
         }
+
+        public String addToCart(String clientName, String itemID)
+        {
+            return "";
+        }
     }
 }

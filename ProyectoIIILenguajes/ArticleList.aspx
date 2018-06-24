@@ -2,24 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    Clientes articulos
+    <div class="text-center">
+        <asp:PlaceHolder ID="itemsHolder" runat="server"></asp:PlaceHolder>
+    </div>
     <div>
-        <table id="itemTable" class="col-lg-12">
-            <tr>
-                <td><img src="/img/636653059523310441.jpg" width="100" height="50"></td>
-                <td>es</td>
-                <td>texto</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </div>
 </asp:Content>

@@ -15,6 +15,7 @@
             <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Ingresar" />
         </div>
         <div>
+            <asp:TextBox ID="tbDate" runat="server" TextMode="Date"></asp:TextBox>
             <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </div>
     </form>

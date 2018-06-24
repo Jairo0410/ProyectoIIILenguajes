@@ -104,7 +104,7 @@ namespace Business
             return result;
         }
 
-        public LinkedList<Item> getItems()
+        public LinkedList<Item> getItems(String date)
         {
             LinkedList<Item> items = new LinkedList<Item>();
 
@@ -116,7 +116,9 @@ namespace Business
 
                 SqlDataAdapter sqlDataAdapterClient = new SqlDataAdapter();
                 sqlDataAdapterClient.SelectCommand = new SqlCommand();
+                sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect;
+                sqlDataAdapterClient.SelectCommand.Parameters.Add(new SqlParameter("@date", date));
                 sqlDataAdapterClient.SelectCommand.Connection = connection;
 
                 sqlDataAdapterClient.Fill(dataSetCategories, "Item");
@@ -128,11 +130,13 @@ namespace Business
             foreach (DataRow currentRow in dataRowCollection)
             {
                 Item currentItem = new Item();
-                currentItem.Name = currentRow["name"].ToString();
-                currentItem.Price= float.Parse(currentRow["name"].ToString());
+                currentItem.Code = int.Parse(currentRow["code"].ToString());
+                currentItem.Name = currentRow["i_name"].ToString();
+                currentItem.Price= float.Parse(currentRow["price"].ToString());
                 currentItem.Description = currentRow["description"].ToString();
-                String name = currentRow["name"].ToString();
-                String name = currentRow["name"].ToString();
+                currentItem.Image_route = currentRow["image_route"].ToString();
+                currentItem.Category = currentRow["category"].ToString();
+                currentItem.Discount = float.Parse(currentRow["percentage"].ToString());
                 items.AddLast(currentItem);
             } // foreeach
 

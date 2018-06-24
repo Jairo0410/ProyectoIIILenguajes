@@ -9,16 +9,36 @@ namespace Utilities
 {
     public class Util
     {
+        private static String appDate = null;
 
-        public bool anyEmpty(LinkedList<TextBox> boxes)
+        public static String getAppDate()
         {
-            foreach(TextBox box in boxes)
+            if(appDate == null)
             {
-                if (box.Text.Length < 0)
-                    return true;
+                String year = format(DateTime.Today.Year);
+                String month = format(DateTime.Today.Month);
+                String day = format(DateTime.Today.Day);
+
+                appDate = year + month + day;
+            }
+            return appDate;
+        }
+
+        public static String format(int value)
+        {
+            String result = "";
+
+            if(value < 10)
+            {
+                result = result + "0";
             }
 
-            return false;
+            return result + value.ToString();
+        }
+
+        public static void setAppDate(String date)
+        {
+            appDate = date.Replace("-", "");
         }
 
         public static String md5(String cadena)
