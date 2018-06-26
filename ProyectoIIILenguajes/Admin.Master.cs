@@ -4,14 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Utilities;
 
 namespace ProyectoIIILenguajes
 {
     public partial class Admin : System.Web.UI.MasterPage
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                tbDate.Text = Util.getRawAppDate();
+            }
+        }
 
+        public void btnChange_Click(object sender, EventArgs e)
+        {
+            Util.setAppDate(tbDate.Text);
         }
     }
 }

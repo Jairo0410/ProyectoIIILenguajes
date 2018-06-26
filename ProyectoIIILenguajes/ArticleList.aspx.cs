@@ -13,33 +13,52 @@ namespace ProyectoIIILenguajes
 {
     public partial class ArticleList : System.Web.UI.Page
     {
+        private LinkedList<Item> items = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            LinkedList <Item> items = new LinkedList<Item>();
 
-            String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
-            ItemBusiness itemBusiness = new ItemBusiness(connectionString);
-            LinkedList<Item> items = itemBusiness.getItems(Util.getAppDate());
+            if (this.items == null)
+            {
+                String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
+                ItemBusiness itemBusiness = new ItemBusiness(connectionString);
+                items = itemBusiness.getItems(Util.getAppDate());
+            }
+            else
+            {
+                items = this.items;
+            }
 
+            displayItems(items);
+
+            lblMessage.Text = Util.getExchange().ToString();
+            
+        }
+
+        public void displayItems(LinkedList<Item> items)
+        {
             itemsHolder.Controls.Add(new LiteralControl("<table class=\"table-responsive\">"));
 
             int columnCount = 3;
             int count = 1;
             bool rowClosed = true;
 
-            foreach(Item item in items)
+            foreach (Item item in items)
             {
+                float dollarPrice = Util.getExchange();
                 // if the element is the first in the row, then open a new row
-                if(count % columnCount == 1)
+                if (count % columnCount == 1)
                 {
                     itemsHolder.Controls.Add(new LiteralControl("<tr>"));
                     rowClosed = false;
                 }
 
-                itemsHolder.Controls.Add(new LiteralControl("<td class=\"col-lg-"+12/columnCount+"\">"));
+                itemsHolder.Controls.Add(new LiteralControl("<td class=\"col-lg-" + 12 / columnCount + "\">"));
 
                 Image image = new Image();
                 image.ImageUrl = item.Image_route;
-                image.CssClass = "img-responsive";
+                image.CssClass = "img-responsive img-fluid";
 
                 Button addToCart = new Button();
                 addToCart.Text = "Add to cart";
@@ -50,8 +69,9 @@ namespace ProyectoIIILenguajes
                 Label lbName = new Label();
                 lbName.Text = item.Name;
 
-                Label lbDescription = new Label();
-                lbDescription.Text = item.Description;
+                Label lbPrice = new Label();
+                float price = item.Price * dollarPrice;
+                lbPrice.Text = "Precio: ¢" + price.ToString();
 
                 // add elements from each item to the column-row. Order matters
 
@@ -64,8 +84,23 @@ namespace ProyectoIIILenguajes
                 itemsHolder.Controls.Add(new LiteralControl("</div>"));
 
                 itemsHolder.Controls.Add(new LiteralControl("<div>"));
-                itemsHolder.Controls.Add(lbDescription);
+                itemsHolder.Controls.Add(lbPrice);
                 itemsHolder.Controls.Add(new LiteralControl("</div>"));
+
+                if (item.Discount > 0)
+                {
+                    lbPrice.Font.Strikeout = true;
+                    lbPrice.ForeColor = System.Drawing.Color.LightGray;
+
+                    Label lbSalePrice = new Label();
+                    float convertedPrice = item.Price*(1 - item.Discount/100) * dollarPrice;
+                    lbSalePrice.Text = "Oferta: ¢" + convertedPrice.ToString();
+                    lbSalePrice.ForeColor = System.Drawing.Color.Red;
+
+                    itemsHolder.Controls.Add(new LiteralControl("<div>"));
+                    itemsHolder.Controls.Add(lbSalePrice);
+                    itemsHolder.Controls.Add(new LiteralControl("</div>"));
+                }
 
                 itemsHolder.Controls.Add(new LiteralControl("<div>"));
                 itemsHolder.Controls.Add(addToCart);
@@ -99,7 +134,7 @@ namespace ProyectoIIILenguajes
 
         public void addToCartClicked(object sender, EventArgs e)
         {
-            String itemID = (sender as Button).ID;
+            int itemID = int.Parse((sender as Button).ID);
             String clientName = (String) Session["name"];
 
             if(clientName != null)
@@ -120,7 +155,7 @@ namespace ProyectoIIILenguajes
             }
             else
             {
-                lblMessage.Text = itemID;
+                lblMessage.Text = itemID.ToString();
             }
             
         }

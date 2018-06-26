@@ -68,12 +68,14 @@ namespace ProyectoIIILenguajes
             if (ImageUpload.HasFile)
             {
                 String fileExtension = System.IO.Path.GetExtension(ImageUpload.FileName);
-                imageRoute = "img/" + DateTime.Now.Ticks + fileExtension;
+                imageRoute = "~/img/" + DateTime.Now.Ticks + fileExtension;
 
-                String rootedRoute = Server.MapPath("~/" + imageRoute);
+                String rootedRoute = Server.MapPath(imageRoute);
 
-                ImageUpload.SaveAs(rootedRoute);
+                //ImageUpload.SaveAs(imageRoute);
+                lblMessageAdd.Text = "La ruta a guardar es: " + rootedRoute;
 
+                return;
             }
             else
             {

@@ -26,10 +26,6 @@ namespace ProyectoIIILenguajes
                     Server.Transfer("PurchaseHistory.aspx", true);
                 }
             }
-            else
-            {
-                lblMessage.Text = Util.getAppDate();
-            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -47,12 +43,12 @@ namespace ProyectoIIILenguajes
 
             if (type == "Client")
             {
-                Session.Add("name", "privileged");
+                Session.Add("name", username);
                 Server.Transfer("ArticleList.aspx", true);
             }
             else if (type == "Admin")
             {
-                Session.Add("name", username);
+                Session.Add("name", "privileged");
                 Server.Transfer("PurchaseHistory.aspx", true);
             }
             else

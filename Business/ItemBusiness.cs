@@ -1,6 +1,7 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,11 @@ namespace Business
         public LinkedList<Item> getItems(String date)
         {
             return this.itemData.getItems(date);
+        }
+
+        public String addOfferItems(DataTable items, float discount, String initDate, String endDate)
+        {
+            return this.itemData.addOfferItems(items, discount, initDate, endDate);
         }
     }
 }

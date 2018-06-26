@@ -12,16 +12,15 @@ namespace ProyectoIIILenguajes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                tbDate.Text = Util.getRawAppDate();
+            }
         }
 
-        protected void tbDate_TextChanged(object sender, EventArgs e)
+        public void btnChange_Click(object sender, EventArgs e)
         {
             Util.setAppDate(tbDate.Text);
-
-            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "Show Message",
-                "alert('" + Util.getAppDate() + "');", true);
-            //lblMessage.Text = Util.getAppDate();
         }
     }
 }

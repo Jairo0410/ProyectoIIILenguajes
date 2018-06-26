@@ -68,10 +68,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddOffer.aspx" />
     <Content Include="ArticleList.aspx" />
+    <Content Include="Cart.aspx" />
+    <Content Include="Checkout.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="InsertItem.aspx" />
     <Content Include="Logout.aspx" />
+    <Content Include="ManageItems.aspx" />
     <Content Include="public\css\bootstrap.css" />
     <Content Include="public\js\bootstrap.js" />
     <Content Include="public\js\jquery-3.3.1.js" />
@@ -80,6 +84,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddOffer.aspx.cs">
+      <DependentUpon>AddOffer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddOffer.aspx.designer.cs">
+      <DependentUpon>AddOffer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -93,6 +104,20 @@
     </Compile>
     <Compile Include="ArticleList.aspx.designer.cs">
       <DependentUpon>ArticleList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cart.aspx.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cart.aspx.designer.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Client.Master.cs">
       <DependentUpon>Client.Master</DependentUpon>
@@ -128,6 +153,13 @@
     </Compile>
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageItems.aspx.cs">
+      <DependentUpon>ManageItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageItems.aspx.designer.cs">
+      <DependentUpon>ManageItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseHistory.aspx.cs">

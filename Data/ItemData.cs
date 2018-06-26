@@ -142,5 +142,35 @@ namespace Business
 
             return items;
         }
+
+        public String addOfferItems(DataTable items, float discount, String initDate, String endDate)
+        {
+            String result = "OK";
+
+            using (SqlConnection connection = new SqlConnection(this.connString))
+            {
+                String procedure = "spAddDiscountItems";
+
+                SqlCommand command = new SqlCommand(procedure, connection);
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@items", items));
+                command.Parameters.Add(new SqlParameter("@init_date", initDate));
+                command.Parameters.Add(new SqlParameter("@end_date", endDate));
+                command.Parameters.Add(new SqlParameter("@percentage", discount));
+
+                try
+                {
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    result = ex.Message;
+                }
+            }
+            return result;
+        }
     }
 }

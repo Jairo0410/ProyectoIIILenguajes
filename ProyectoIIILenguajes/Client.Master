@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="public/css/bootstrap.css"/>
     <script src="public/js/jquery-3.3.1.js"></script>
+    <script src="public/js/bootstrap.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -27,7 +28,12 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <asp:TextBox ID="tbDate" runat="server" TextMode="Date" OnTextChanged="tbDate_TextChanged"></asp:TextBox>
+                            <a href="Cart.aspx"> Carrito </a>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-link" data-target="#myModal" data-toggle="modal">
+                                Cambiar Fecha
+                            </button>
                         </li>
                         <li>
                             <a href="Logout.aspx"> Salir </a>
@@ -36,9 +42,27 @@
                 </div>
             </nav>
 
+            <div class="modal" id="myModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">
+                                &times;</button>
+                            <h4 class="modal-title"> Cambiar Fecha </h4>
+                        </div>
+                        <div class="modal-body">
+                            <asp:Label ID="Label1" runat="server" Text="Nueva Fecha:"></asp:Label>
+                            <asp:TextBox ID="tbDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnChange" class="btn btn-primary" runat="server" Text="Cambiar" OnClick="btnChange_Click"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    <asp:Label ID="lblMessage" runat="server"></asp:Label>
                 </asp:ContentPlaceHolder>
             </div>
         </form>

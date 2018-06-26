@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form id="form2" autocomplete="off">
+    <div class="col-lg-6 col-lg-offset-3">
         <div>
             <asp:Label ID="Label1" runat="server" Text="Usuario"></asp:Label>
             <asp:TextBox ID="tbUsername" class="form-control" runat="server"></asp:TextBox>
@@ -11,12 +11,12 @@
             <asp:Label ID="Label2" runat="server" Text="Contraseña"></asp:Label>
             <asp:TextBox ID="tbPassword" class="form-control" runat="server" TextMode="Password"></asp:TextBox>
         </div>
+        <br/>
         <div>
             <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Ingresar" />
         </div>
         <div>
-            <asp:TextBox ID="tbDate" runat="server" TextMode="Date"></asp:TextBox>
             <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </div>
-    </form>
+    </div>
 </asp:Content>
