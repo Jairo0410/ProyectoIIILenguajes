@@ -16,11 +16,9 @@ namespace ProyectoIIILenguajes
         protected void Page_Load(object sender, EventArgs e)
         {
             String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
-            ItemBusiness clientBusiness = new ItemBusiness(connectionString);
+            ItemBusiness itemBusiness = new ItemBusiness(connectionString);
 
-            String clientName = (String)Session["name"];
-
-            LinkedList<Item> items = clientBusiness.getItems(Util.getAppDate());
+            LinkedList<Item> items = itemBusiness.getItems(Util.getAppDate());
 
             if (items.Count == 0)
             {
@@ -88,7 +86,25 @@ namespace ProyectoIIILenguajes
 
         public void btnDeleteClicked(object sender, EventArgs e)
         {
+            int ID = int.Parse((sender as Button).ID);
 
+            String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
+            ItemBusiness itemBusiness = new ItemBusiness(connectionString);
+
+            String result = itemBusiness.removeItem(ID);
+
+            if(result == "OK")
+            {
+                Server.Transfer("ManageItems.aspx");
+            }
+            else
+            {
+                itemsHolder.Controls.Add(
+                    new LiteralControl(Message.errorMessage(result))
+                    );
+            }
+
+            
         }
 
     }

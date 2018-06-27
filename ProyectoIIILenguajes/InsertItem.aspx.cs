@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics; // getTimestamp
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business;
+using Utilities;
 
 namespace ProyectoIIILenguajes
 {
@@ -42,10 +44,15 @@ namespace ProyectoIIILenguajes
             if(result == "OK")
             {
                 ddlCategory.Items.Add(new ListItem(categoryName));
+                categoryHolder.Controls.Add(
+                    new LiteralControl(Message.successMessage("Exito al guardar la categoria"))
+                    );
             }
             else
             {
-                lblMessageCategoria.Text = result;
+                categoryHolder.Controls.Add(
+                    new LiteralControl(Message.errorMessage(result))
+                    );
             }
 
             
@@ -59,49 +66,48 @@ namespace ProyectoIIILenguajes
                 price = float.Parse(tbPrice.Text);
             } catch (Exception)
             {
-                lblMessageAdd.Text = "El precio debe ser un valor numerico";
+                itemHolder.Controls.Add(
+                    new LiteralControl(Message.errorMessage("El precio debe ser un valor numerico"))
+                    );
                 return;
             }
 
-            String imageRoute;
-
-            if (ImageUpload.HasFile)
+            if (!ImageUpload.HasFile)
             {
-                String fileExtension = System.IO.Path.GetExtension(ImageUpload.FileName);
-                imageRoute = "~/img/" + DateTime.Now.Ticks + fileExtension;
-
-                String rootedRoute = Server.MapPath(imageRoute);
-
-                //ImageUpload.SaveAs(imageRoute);
-                lblMessageAdd.Text = "La ruta a guardar es: " + rootedRoute;
-
-                return;
-            }
-            else
-            {
-                lblMessageAdd.Text = "La imagen no fue seleccionada";
+                itemHolder.Controls.Add(
+                    new LiteralControl(Message.errorMessage("La imagen no fue seleccionada"))
+                    );
                 return;
             }
 
-            String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
+            HttpPostedFile postedFile = ImageUpload.PostedFile;
+            Stream stream = postedFile.InputStream;
+            BinaryReader reader = new BinaryReader(stream);
+
+            byte[] imageBytes = reader.ReadBytes((int) stream.Length);
+
             String name = tbName.Text;
 
             String description = tbDescription.Text;
             String category = ddlCategory.SelectedValue;
 
-            
-            
+            String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
+
             ItemBusiness business = new ItemBusiness(connectionString);
 
-            String result = business.addItem(name, price, description, imageRoute, category);
+            String result = business.addItem(name, price, description, imageBytes, category);
 
             if (result == "OK")
             {
-                lblMessageAdd.Text = "Articulo insertado con exito";
+                itemHolder.Controls.Add(
+                    new LiteralControl(Message.successMessage("Exito al insertar el articulo nuevo"))
+                    );
             }
             else
             {
-                lblMessageAdd.Text = result;
+                itemHolder.Controls.Add(
+                    new LiteralControl(Message.errorMessage(result))
+                    );
             }
         }
     }

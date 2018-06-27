@@ -65,7 +65,9 @@ namespace ProyectoIIILenguajes
                 cartHolder.Controls.Add(new LiteralControl("<tr>"));
 
                 cartHolder.Controls.Add(new LiteralControl(MyControl.TableItem(item.Name)));
-                cartHolder.Controls.Add(new LiteralControl(MyControl.TableItem( "¢" + item.Price.ToString() )));
+
+                float price = item.Price * Util.getExchange();
+                cartHolder.Controls.Add(new LiteralControl(MyControl.TableItem( "¢" + price.ToString() )));
 
                 cartHolder.Controls.Add(new LiteralControl("<td>"));
 
@@ -99,6 +101,8 @@ namespace ProyectoIIILenguajes
 
         public void btnBorrarClicked(object sender, EventArgs e)
         {
+            messageHolder.Controls.Clear();
+
             String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
             ClientBusiness clientBusiness = new ClientBusiness(connectionString);
 
@@ -114,7 +118,9 @@ namespace ProyectoIIILenguajes
             }
             else
             {
-                lblMessage.Text = result;
+                messageHolder.Controls.Add(
+                    new LiteralControl(Message.errorMessage(result))
+                    );
             }
         }
     }

@@ -30,6 +30,8 @@ namespace ProyectoIIILenguajes
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            messageHolder.Controls.Clear();
+
             String connectionString = WebConfigurationManager.ConnectionStrings["DBLENGUAJES"].ToString();
 
             SessionBusiness business = new SessionBusiness(connectionString);
@@ -53,7 +55,9 @@ namespace ProyectoIIILenguajes
             }
             else
             {
-                lblMessage.Text = "Credenciales incorrectas ";
+                messageHolder.Controls.Add(
+                    new LiteralControl(Message.errorMessage("Credenciales incorrectas"))
+                    );
             }
 
         }

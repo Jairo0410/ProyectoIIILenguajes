@@ -40,13 +40,13 @@ namespace ProyectoIIILenguajes {
         protected global::System.Web.UI.WebControls.Button btnAddCategory;
         
         /// <summary>
-        /// lblMessageCategoria control.
+        /// categoryHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessageCategoria;
+        protected global::System.Web.UI.WebControls.PlaceHolder categoryHolder;
         
         /// <summary>
         /// ddlCategory control.
@@ -112,12 +112,12 @@ namespace ProyectoIIILenguajes {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// lblMessageAdd control.
+        /// itemHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessageAdd;
+        protected global::System.Web.UI.WebControls.PlaceHolder itemHolder;
     }
 }

@@ -2,6 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,11 @@ namespace Business
         public LinkedList<Item> getCart(String clientName, String date)
         {
             return this.clientData.getCart(clientName, date);
+        }
+
+        public String doPurchase(DataTable items, String userName, String date)
+        {
+            return this.clientData.doPurchase(items, userName, date);
         }
     }
 }

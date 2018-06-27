@@ -61,11 +61,6 @@ namespace ProyectoIIILenguajes
 
             foreach (Item item in items)
             {
-                if(item.Discount > 0)
-                {
-                    continue;
-                }
-
                 itemsHolder.Controls.Add(new LiteralControl("<tr>"));
 
                 itemsHolder.Controls.Add(new LiteralControl(MyControl.TableItem(item.Name)));

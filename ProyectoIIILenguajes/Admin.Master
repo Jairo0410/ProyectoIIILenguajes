@@ -60,7 +60,7 @@
                             <asp:TextBox ID="tbDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="btnChange" class="btn btn-primary" runat="server" Text="Cambiar" OnClick="btnChange_Click"/>
+                            <asp:Button ID="btnChange" class="btn btn-primary pull-left" runat="server" Text="Cambiar" OnClick="btnChange_Click"/>
                         </div>
                     </div>
                 </div>

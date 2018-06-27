@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilities;
 
 namespace Business
 {
@@ -27,9 +28,9 @@ namespace Business
             return this.itemData.getCategories();
         }
 
-        public String addItem(String name, float price, String description, String imageRoute, String category)
+        public String addItem(String name, float price, String description, byte[] image, String category)
         {
-            return this.itemData.addItem(name, price, description, imageRoute, category);
+            return this.itemData.addItem(name, price, description, image, category);
         }
 
         public LinkedList<Item> getItems(String date)
@@ -39,7 +40,27 @@ namespace Business
 
         public String addOfferItems(DataTable items, float discount, String initDate, String endDate)
         {
+            if(discount <= 0)
+            {
+               return "El porcentaje de descuento debe ser mayor a 0";
+            }
+
+            if(Util.compare(initDate, Util.getAppDate()) < 0)
+            {
+                return "La fecha de inicio de la oferta no puede ser menor a la de hoy";
+            }
+
+            if(Util.compare(initDate, endDate) > 0)
+            {
+                return "La fecha de fin no puede ser menor de la de inicio";
+            }
+
             return this.itemData.addOfferItems(items, discount, initDate, endDate);
+        }
+
+        public String removeItem(int code)
+        {
+            return this.itemData.removeItem(code);
         }
     }
 }

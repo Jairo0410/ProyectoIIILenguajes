@@ -109,5 +109,33 @@ namespace Data
 
             return items;
         }
+
+        public String doPurchase(DataTable items, String clientName, String date)
+        {
+            String result = "OK";
+
+            using (SqlConnection connection = new SqlConnection(this.connString))
+            {
+                String procedure = "spDoPurchase";
+
+                SqlCommand command = new SqlCommand(procedure, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@items", items));
+                command.Parameters.Add(new SqlParameter("@c_name", clientName));
+                command.Parameters.Add(new SqlParameter("@date", date));
+
+                try
+                {
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    result = ex.Message;
+                }
+            }
+
+            return result;
+        }
     }
 }

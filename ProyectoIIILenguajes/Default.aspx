@@ -15,8 +15,10 @@
         <div>
             <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Ingresar" />
         </div>
+        <br />
         <div>
-            <asp:Label ID="lblMessage" runat="server"></asp:Label>
+            <asp:PlaceHolder ID="messageHolder" runat="server"></asp:PlaceHolder>
         </div>
+        
     </div>
 </asp:Content>

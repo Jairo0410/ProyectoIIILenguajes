@@ -13,7 +13,7 @@ namespace Domain
         private float price;
         private String description;
         private String category;
-        private String image_route;
+        private byte[] image;
         private float discount;
 
         public Item()
@@ -23,18 +23,18 @@ namespace Domain
             this.price = 0;
             this.description = "no description";
             this.category = "no category";
-            this.image_route = "no route";
+            this.image = new byte[]{};
             this.discount = 0;
         }
 
-        public Item(int code, string name, float price, string description, string category, string image_route, float discount)
+        public Item(int code, string name, float price, string description, string category, byte[] image, float discount)
         {
             this.code = code;
             this.name = name;
             this.price = price;
             this.description = description;
             this.category = category;
-            this.image_route = image_route;
+            this.image = image;
             this.discount = discount;
         }
 
@@ -42,7 +42,7 @@ namespace Domain
         public float Price { get => price; set => price = value; }
         public string Description { get => description; set => description = value; }
         public string Category { get => category; set => category = value; }
-        public string Image_route { get => image_route; set => image_route = value; }
+        public byte[] Image { get => image; set => image = value; }
         public float Discount { get => discount; set => discount = value; }
         public int Code { get => code; set => code = value; }
     }

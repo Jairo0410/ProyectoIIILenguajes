@@ -31,8 +31,6 @@ namespace ProyectoIIILenguajes
             }
 
             displayItems(items);
-
-            lblMessage.Text = Util.getExchange().ToString();
             
         }
 
@@ -54,24 +52,38 @@ namespace ProyectoIIILenguajes
                     rowClosed = false;
                 }
 
-                itemsHolder.Controls.Add(new LiteralControl("<td class=\"col-lg-" + 12 / columnCount + "\">"));
+                itemsHolder.Controls.Add(new LiteralControl("<td class=\"col-lg-" + 12 / columnCount + " text-center\">"));
 
                 Image image = new Image();
-                image.ImageUrl = item.Image_route;
+                image.ImageUrl = "data:Image/png;base64," + Convert.ToBase64String(item.Image);
                 image.CssClass = "img-responsive img-fluid";
 
                 Button addToCart = new Button();
-                addToCart.Text = "Add to cart";
-                addToCart.CssClass = "btn btn-primary";
+                addToCart.Text = "Añadir a carrito";
+                addToCart.CssClass = "btn btn-default";
                 addToCart.Click += addToCartClicked;
                 addToCart.ID = item.Code.ToString();
 
+                Button buyDirectly = new Button();
+                buyDirectly.Text = "Comprar";
+                buyDirectly.CssClass = "btn btn-primary";
+                buyDirectly.Click += buyDirectlyClicked;
+                buyDirectly.ID = item.Code.ToString();
+
+                Button addToFav = new Button();
+                addToFav.Text = "Favorito";
+                addToFav.CssClass = "btn btn-info";
+                addToFav.Click += addToFavClicked;
+                addToFav.ID = item.Code.ToString();
+
                 Label lbName = new Label();
                 lbName.Text = item.Name;
+                lbName.ForeColor = System.Drawing.Color.DeepSkyBlue;
 
                 Label lbPrice = new Label();
-                float price = item.Price * dollarPrice;
-                lbPrice.Text = "Precio: ¢" + price.ToString();
+                float normalPrice = item.Price * dollarPrice;
+                lbPrice.Text = "Precio: ¢" + normalPrice + " ($" + item.Price + ")";
+                lbPrice.CssClass = "text-center";
 
                 // add elements from each item to the column-row. Order matters
 
@@ -93,9 +105,11 @@ namespace ProyectoIIILenguajes
                     lbPrice.ForeColor = System.Drawing.Color.LightGray;
 
                     Label lbSalePrice = new Label();
-                    float convertedPrice = item.Price*(1 - item.Discount/100) * dollarPrice;
-                    lbSalePrice.Text = "Oferta: ¢" + convertedPrice.ToString();
+                    float offerPrice = item.Price * (1 - item.Discount / 100);
+                    float convertedPrice = offerPrice * dollarPrice;
+                    lbSalePrice.Text = "Oferta: ¢" + convertedPrice + " ($" + offerPrice + ")";
                     lbSalePrice.ForeColor = System.Drawing.Color.Red;
+                    lbSalePrice.CssClass = "text-center";
 
                     itemsHolder.Controls.Add(new LiteralControl("<div>"));
                     itemsHolder.Controls.Add(lbSalePrice);
@@ -104,6 +118,16 @@ namespace ProyectoIIILenguajes
 
                 itemsHolder.Controls.Add(new LiteralControl("<div>"));
                 itemsHolder.Controls.Add(addToCart);
+                itemsHolder.Controls.Add(new LiteralControl("</div>"));
+
+                itemsHolder.Controls.Add(new LiteralControl("<div class=\"d-inline-block\">"));
+
+
+                itemsHolder.Controls.Add(addToFav);
+
+                itemsHolder.Controls.Add(buyDirectly);
+
+
                 itemsHolder.Controls.Add(new LiteralControl("</div>"));
 
 
@@ -127,13 +151,26 @@ namespace ProyectoIIILenguajes
             itemsHolder.Controls.Add(new LiteralControl("</table>"));
         }
 
-        public void addToCart(String id)
+        public void addToFavClicked(object sender, EventArgs e)
         {
-            lblMessage.Text = "Este es el id del elemento seleccionado: " + id;
+            //messageHolder.Controls.Clear();
+            messageHolder.Controls.Add(
+                new LiteralControl("Annadir a Favoritos: "+(sender as Button).ID)
+                );
+        }
+
+        public void buyDirectlyClicked(object sender, EventArgs e)
+        {
+            //messageHolder.Controls.Clear();
+            messageHolder.Controls.Add(
+                new LiteralControl("Comprar directamente: " +(sender as Button).ID)
+                );
         }
 
         public void addToCartClicked(object sender, EventArgs e)
         {
+            //messageHolder.Controls.Clear();
+
             int itemID = int.Parse((sender as Button).ID);
             String clientName = (String) Session["name"];
 
@@ -146,16 +183,16 @@ namespace ProyectoIIILenguajes
 
                 if(result == "OK")
                 {
-                    lblMessage.Text = "Exito al agregar el item al carrito";
+                    messageHolder.Controls.Add(
+                        new LiteralControl(Message.successMessage("Exito al agregar el item al carrito"))
+                        );
                 }
                 else
                 {
-                    lblMessage.Text = result;
+                    messageHolder.Controls.Add(
+                        new LiteralControl(Message.errorMessage(result))
+                        );
                 }
-            }
-            else
-            {
-                lblMessage.Text = itemID.ToString();
             }
             
         }

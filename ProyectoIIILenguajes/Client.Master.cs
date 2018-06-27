@@ -20,7 +20,12 @@ namespace ProyectoIIILenguajes
 
         public void btnChange_Click(object sender, EventArgs e)
         {
-            Util.setAppDate(tbDate.Text);
+            bool changed = Util.setAppDate(tbDate.Text);
+
+            if (changed)
+            {
+                Server.Transfer(Request.RawUrl);
+            }
         }
     }
 }

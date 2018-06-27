@@ -3,18 +3,16 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="text-center">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
+    
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <div>
                 <asp:PlaceHolder ID="itemsHolder" runat="server"></asp:PlaceHolder>
-                <asp:ScriptManager runat="server"></asp:ScriptManager>
+            </div>
+            <asp:ScriptManager runat="server"></asp:ScriptManager>
 
-                <div>
-                    <asp:Label ID="lblMessage" runat="server"></asp:Label>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        
-    </div>
+            <asp:PlaceHolder ID="messageHolder" runat="server"></asp:PlaceHolder>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     
 </asp:Content>

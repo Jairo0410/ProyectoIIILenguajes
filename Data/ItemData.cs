@@ -73,7 +73,7 @@ namespace Business
             return categories;
         }
 
-        public String addItem(String name, float price, String description, String imageRoute, String category)
+        public String addItem(String name, float price, String description, byte[] image, String category)
         {
             String result = "OK";
 
@@ -88,8 +88,8 @@ namespace Business
                 command.Parameters.Add(new SqlParameter("@name", name));
                 command.Parameters.Add(new SqlParameter("@price", price));
                 command.Parameters.Add(new SqlParameter("@description", description));
-                command.Parameters.Add(new SqlParameter("@image_route", imageRoute));
                 command.Parameters.Add(new SqlParameter("@category", category));
+                command.Parameters.Add(new SqlParameter("@image", image));
 
                 try
                 {
@@ -134,7 +134,7 @@ namespace Business
                 currentItem.Name = currentRow["i_name"].ToString();
                 currentItem.Price= float.Parse(currentRow["price"].ToString());
                 currentItem.Description = currentRow["description"].ToString();
-                currentItem.Image_route = currentRow["image_route"].ToString();
+                currentItem.Image = (byte[]) currentRow["image"];
                 currentItem.Category = currentRow["category"].ToString();
                 currentItem.Discount = float.Parse(currentRow["percentage"].ToString());
                 items.AddLast(currentItem);
@@ -159,6 +159,33 @@ namespace Business
                 command.Parameters.Add(new SqlParameter("@init_date", initDate));
                 command.Parameters.Add(new SqlParameter("@end_date", endDate));
                 command.Parameters.Add(new SqlParameter("@percentage", discount));
+
+                try
+                {
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    result = ex.Message;
+                }
+            }
+            return result;
+        }
+
+        public String removeItem(int code)
+        {
+            String result = "OK";
+
+            using (SqlConnection connection = new SqlConnection(this.connString))
+            {
+                String procedure = "spRemoveItem";
+
+                SqlCommand command = new SqlCommand(procedure, connection);
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@code", code));
 
                 try
                 {

@@ -5,5 +5,7 @@
     <div>
         <asp:PlaceHolder ID="cartHolder" runat="server"></asp:PlaceHolder>
     </div>
-    <asp:Label ID="lblMessage" runat="server"></asp:Label>
-</asp:Content>
+    <div>
+        <asp:PlaceHolder ID="messageHolder" runat="server"></asp:PlaceHolder>
+    </div>
+    </asp:Content>

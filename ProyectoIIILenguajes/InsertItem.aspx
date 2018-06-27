@@ -16,7 +16,7 @@
                 <div>
                     <asp:Button ID="btnAddCategory" class="btn btn-default" runat="server" Text="Añadir Categoría" OnClick="btnAddCategory_Click" />
                     <div>
-                        <asp:Label ID="lblMessageCategoria" runat="server"></asp:Label>
+                        <asp:PlaceHolder ID="categoryHolder" runat="server"></asp:PlaceHolder>
                     </div>
                     <h3>Insertar Artículo</h3>
                     <div>
@@ -56,7 +56,7 @@
             <asp:Button ID="btnAdd" class="btn btn-primary" runat="server" Text="Agregar" OnClick="btnAdd_Click" />
         </div>
         <div>
-            <asp:Label ID="lblMessageAdd" runat="server"></asp:Label>
+            <asp:PlaceHolder ID="itemHolder" runat="server"></asp:PlaceHolder>
         </div>
     </div>
     
